@@ -19,6 +19,10 @@ namespace cpsc5031_hw6
 
             var dot = GenerateFile(lines, dotFile_1);
             Console.WriteLine(dot);
+
+            Console.WriteLine("Generate image file");
+            generateImage("", "");
+            Console.WriteLine("done");
         }
 
         /// <summary>
@@ -112,6 +116,26 @@ namespace cpsc5031_hw6
             {
                 writer.Write(text);
             }
+        }
+
+        private static void generateImage(string dotFilePath, string imageFilePath)
+        {
+            //string commandLine;
+            //commandLine = "dot -Tpng adj1.dot -o adj1.png";
+            //System.Diagnostics.Process.Start("CMD.exe", commandLine);
+            //System.Diagnostics.Process process = new System.Diagnostics.Process();
+            //System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            //startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            //startInfo.FileName = "cmd.exe";
+            //startInfo.Arguments = "dot -Tpng adj1.dot -o adj1.png";
+            //process.StartInfo = startInfo;
+            //process.Start();
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            process.StartInfo.FileName = "CMD.exe";
+            process.StartInfo.Arguments = "dot -Tpng C:\\Users\\dzzn\\Desktop\\CPSC5031_02\\week8\\homework6\files\adj1.dot -o C:\\Users\\dzzn\\Desktop\\CPSC5031_02\\week8\\homework6\files\adj1.png";
+            string command = "dot -Tpng C:\\Users\\dzzn\\Desktop\\CPSC5031_02\\week8\\homework6\files\adj1.dot -o C:\\Users\\dzzn\\Desktop\\CPSC5031_02\\week8\\homework6\files\adj1.png";
+            System.Diagnostics.Process.Start("CMD.exe", command);
         }
     }
 }
