@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace cpsc5031_hw6
@@ -11,6 +12,7 @@ namespace cpsc5031_hw6
             Console.WriteLine("Homework 6");
             string textFile_1 = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\adj1.txt";
             string dotFile_1 = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\adj1.dot";
+            string directory = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\";
             var lines = ReadTextFile(textFile_1);
             foreach(var line in lines)
             {
@@ -21,7 +23,7 @@ namespace cpsc5031_hw6
             Console.WriteLine(dot);
 
             Console.WriteLine("Generate image file");
-            generateImage("", "");
+            generateImage("adj1.dot", "adj1.png", directory);
             Console.WriteLine("done");
         }
 
@@ -118,24 +120,28 @@ namespace cpsc5031_hw6
             }
         }
 
-        private static void generateImage(string dotFilePath, string imageFilePath)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dotFilePath"></param>
+        /// <param name="imageFilePath"></param>
+        /// <param name="directory"></param>
+        private static void generateImage(string dotFilePath, string imageFilePath, string directory)
         {
-            //string commandLine;
-            //commandLine = "dot -Tpng adj1.dot -o adj1.png";
-            //System.Diagnostics.Process.Start("CMD.exe", commandLine);
-            //System.Diagnostics.Process process = new System.Diagnostics.Process();
-            //System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            //startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            //startInfo.FileName = "cmd.exe";
-            //startInfo.Arguments = "dot -Tpng adj1.dot -o adj1.png";
-            //process.StartInfo = startInfo;
-            //process.Start();
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            process.StartInfo.FileName = "CMD.exe";
-            process.StartInfo.Arguments = "dot -Tpng C:\\Users\\dzzn\\Desktop\\CPSC5031_02\\week8\\homework6\files\adj1.dot -o C:\\Users\\dzzn\\Desktop\\CPSC5031_02\\week8\\homework6\files\adj1.png";
-            string command = "dot -Tpng C:\\Users\\dzzn\\Desktop\\CPSC5031_02\\week8\\homework6\files\adj1.dot -o C:\\Users\\dzzn\\Desktop\\CPSC5031_02\\week8\\homework6\files\adj1.png";
-            System.Diagnostics.Process.Start("CMD.exe", command);
+            string commandTemplate = "dot -Tpng {0} -o {1}";            
+            string command = String.Format(commandTemplate, dotFilePath, imageFilePath);
+            using(Process process = new Process())
+            {
+                process.StartInfo = new ProcessStartInfo("cmd.exe")
+                {
+                    RedirectStandardInput = true,
+                    UseShellExecute = false,                    
+                    WorkingDirectory = directory
+                };
+                process.Start();
+                process.StandardInput.WriteLine(command);
+                process.WaitForExit();
+            }
         }
     }
 }
