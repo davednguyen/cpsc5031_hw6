@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/cpsc5031_hw6/bin/Debug/netcoreapp3.1
+/cpsc5031_hw6/obj/Debug/netcoreapp3.1
+/cpsc5031_hw6/obj
+/.vs/cpsc5031_hw6/v16/.suo
