@@ -37,10 +37,10 @@ namespace cpsc5031_hw6
         public bool GraphVizGenerator(string textFileName, string imageFileName, string dotFileName, string directory)
         {
             //null check for all required inputs
-            if(textFileName != null && imageFileName != null && dotFileName != null && directory != null)
+            if(textFileName != null || imageFileName != null || dotFileName != null || directory != null)
             {
                 //check to make sure user don't provide empty string for any inputs
-                if(textFileName.Equals(string.Empty) && imageFileName.Equals(string.Empty) && dotFileName.Equals(string.Empty) && directory.Equals(string.Empty))
+                if(textFileName.Equals(string.Empty) || imageFileName.Equals(string.Empty) || dotFileName.Equals(string.Empty) || directory.Equals(string.Empty))
                 {
                     var lines = readTextFile(directory + textFileName);
                     var dotFileBody = generateDotFileBody(lines);
