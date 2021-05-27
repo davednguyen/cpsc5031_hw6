@@ -5,7 +5,7 @@ using System.IO;
 
 namespace cpsc5031_hw6
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
