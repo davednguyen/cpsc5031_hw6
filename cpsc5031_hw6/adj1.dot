@@ -1,0 +1,6 @@
+graph adj1 {
+A--C
+A--D
+B--C
+B--D
+}
