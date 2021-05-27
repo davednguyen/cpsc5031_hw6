@@ -120,5 +120,53 @@ namespace GraphVizTestProject
             var check = graph.GraphVizGeneratorV2("adj6.txt", "adj12.png", "adj12.dot", directory, true);
             Assert.AreEqual(true, check);
         }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHasSpecialCharactersOnly_Graph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj7.txt", "adj12.png", "adj12.dot", directory, false);
+            Assert.AreEqual(true, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHasSpecialCharactersOnly_Dgraph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj7.txt", "adj13.png", "adj13.dot", directory, true);
+            Assert.AreEqual(true, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHas_1_Only_Graph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj8.txt", "adj13.png", "adj13.dot", directory, false);
+            Assert.AreEqual(true, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHas_1_Only_dgraph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj8.txt", "adj14.png", "adj14.dot", directory, true);
+            Assert.AreEqual(true, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHas_0_Only_Graph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj9.txt", "adj14.png", "adj14.dot", directory, false);
+            Assert.AreEqual(true, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHas_0_Only_dgraph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj9.txt", "adj15.png", "adj15.dot", directory, true);
+            Assert.AreEqual(true, check);
+        }
     }
 }

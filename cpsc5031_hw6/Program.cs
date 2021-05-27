@@ -170,6 +170,17 @@ namespace cpsc5031_hw6
                                 completedNodes.Add(part2);
                             }
                         }
+                        else if (list[j].Equals('0'))
+                        {
+                            string part1 = nodes[i].ToString();
+                            string part2 = nodes[j].ToString();
+                            if (!completedNodes.Contains(part1) && !completedNodes.Contains(part2))
+                            {
+                                dotFileoBody = dotFileoBody + nodes[j] + "\n";
+                                completedNodes.Add(part1);
+                                completedNodes.Add(part2);
+                            }
+                        }
                     }
                 }
                 dotFileoBody = dotFileoBody + lastLine;
