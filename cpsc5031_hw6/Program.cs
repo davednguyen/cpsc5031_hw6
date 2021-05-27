@@ -10,21 +10,11 @@ namespace cpsc5031_hw6
         static void Main(string[] args)
         {
             Console.WriteLine("Homework 6");
-            string textFile_1 = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\adj1.txt";
-            string dotFile_1 = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\adj1.dot";
+            string textFile_1 = "adj1.txt";
+            string dotFile_1 = "adj1.dot";
+            string imageFile_1 = "adj1.png";
             string directory = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\";
-            var lines = readTextFile(textFile_1);
-            foreach(var line in lines)
-            {
-                Console.WriteLine(line);
-            }
-
-            var dot = generateDotFileBody(lines);
-            Console.WriteLine(dot);
-
-            Console.WriteLine("Generate image file");
-            generateImage("adj1.dot", "adj1.png", directory);
-            Console.WriteLine("done");
+            GraphVizGenerator(textFile_1, imageFile_1, dotFile_1, directory);
         }
 
         /// <summary>
@@ -34,13 +24,13 @@ namespace cpsc5031_hw6
         /// <param name="imageFileName"></param>
         /// <param name="dotFileName"></param>
         /// <param name="directory"></param>
-        public bool GraphVizGenerator(string textFileName, string imageFileName, string dotFileName, string directory)
+        public static bool GraphVizGenerator(string textFileName, string imageFileName, string dotFileName, string directory)
         {
             //null check for all required inputs
             if(textFileName != null || imageFileName != null || dotFileName != null || directory != null)
             {
                 //check to make sure user don't provide empty string for any inputs
-                if(textFileName.Equals(string.Empty) || imageFileName.Equals(string.Empty) || dotFileName.Equals(string.Empty) || directory.Equals(string.Empty))
+                if(!textFileName.Equals(string.Empty) || !imageFileName.Equals(string.Empty) || !dotFileName.Equals(string.Empty) || !directory.Equals(string.Empty))
                 {
                     var lines = readTextFile(directory + textFileName);
                     var dotFileBody = generateDotFileBody(lines);
@@ -136,7 +126,7 @@ namespace cpsc5031_hw6
         }
 
         /// <summary>
-        /// 
+        /// Build a dot file for graph
         /// </summary>
         /// <param name="stringbody">Dot file string body</param>
         /// <param name="path">location and file name for the dot file</param>
@@ -156,15 +146,24 @@ namespace cpsc5031_hw6
         }
 
         /// <summary>
-        /// 
+        /// Generate Graph based on dot file
         /// </summary>
-        /// <param name="dotFilePath"></param>
-        /// <param name="imageFilePath"></param>
+        /// <param name="dotFile">dot file name</param>
+        /// <param name="imageFile">image file name</param>
         /// <param name="directory"></param>
         private static void generateImage(string dotFile, string imageFile, string directory)
         {
+            //delete the image file if it already exsited in the foler
+            string exisitingImageFile = directory + imageFile;
+            if (File.Exists(exisitingImageFile))
+            {
+                File.Delete(exisitingImageFile);
+            }
+            //command to generage image file
             string commandTemplate = "dot -Tpng {0} -o {1}";
+            //where to run the command
             string application = "cmd.exe";
+            //complete command
             string command = String.Format(commandTemplate, dotFile, imageFile);
             using(Process process = new Process())
             {
