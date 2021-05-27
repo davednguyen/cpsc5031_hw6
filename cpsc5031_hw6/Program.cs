@@ -10,20 +10,20 @@ namespace cpsc5031_hw6
         static void Main(string[] args)
         {
             Console.WriteLine("Homework 6");
-            string textFile_1 = "adj1.txt";
-            string dotFile_1 = "adj1.dot";
-            string imageFile_1 = "adj1.png";
             string directory = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\";
-            GraphVizGenerator(textFile_1, imageFile_1, dotFile_1, directory);
+            GraphVizGenerator("adj1.txt", "adj1.png", "adj1.dot", directory);
+            GraphVizGenerator("adj2.txt", "adj2.png", "adj2.dot", directory);
+            GraphVizGenerator("adj3.txt", "adj3.png", "adj3.dot", directory);
+            GraphVizGenerator("adj4.txt", "adj4.png", "adj4.dot", directory);
         }
 
         /// <summary>
-        /// 
+        /// Generate a graph base on matrix of binary number (0 and 1)
         /// </summary>
-        /// <param name="textFileName"></param>
-        /// <param name="imageFileName"></param>
-        /// <param name="dotFileName"></param>
-        /// <param name="directory"></param>
+        /// <param name="textFileName">matrix text file name provide by user</param>
+        /// <param name="imageFileName">image file name provide by user</param>
+        /// <param name="dotFileName">dot file name provide by user</param>
+        /// <param name="directory">location where to get text file, to save dot file and to save image file</param>
         public static bool GraphVizGenerator(string textFileName, string imageFileName, string dotFileName, string directory)
         {
             //null check for all required inputs
@@ -90,7 +90,7 @@ namespace cpsc5031_hw6
         {
             if(lines != null)
             {
-                string lineOne = "graph adj1 {";
+                string lineOne = "graph matrix {";
                 string lastLine = "}";
                 //assign name for each node in the graph
                 var nodes = Letters();
@@ -176,6 +176,8 @@ namespace cpsc5031_hw6
                 process.Start();
                 process.StandardInput.WriteLine(command);
                 process.WaitForExit();
+                process.CloseMainWindow();
+                process.Close();
             }
         }
     }
