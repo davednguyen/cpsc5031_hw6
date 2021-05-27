@@ -7,16 +7,17 @@ namespace cpsc5031_hw6
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Homework 6");
-            string directory = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\";
+            //string directory = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\";
+            string directory = @"C:\Users\mr4eyesn\Desktop\CPSC5031_2\week8\homework\code\cpsc5031_hw6\files\";
             GraphVizGenerator("adj1.txt", "adj1.png", "adj1.dot", directory);
             GraphVizGenerator("adj2.txt", "adj2.png", "adj2.dot", directory);
             GraphVizGenerator("adj3.txt", "adj3.png", "adj3.dot", directory);
             GraphVizGenerator("adj4.txt", "adj4.png", "adj4.dot", directory);
         }
-
+     
         /// <summary>
         /// Generate a graph base on matrix of binary number (0 and 1)
         /// </summary>
@@ -50,6 +51,18 @@ namespace cpsc5031_hw6
             }            
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="textFileName"></param>
+        /// <param name="imageFileName"></param>
+        /// <param name="dotFileName"></param>
+        /// <param name="directory"></param>
+        /// <returns></returns>
+        public bool GraphVizGeneratorV2(string textFileName, string imageFileName, string dotFileName, string directory)
+        {
+            return GraphVizGenerator(textFileName, imageFileName, dotFileName, directory);
+        }
         /// <summary>
         /// read text file
         /// </summary>
