@@ -60,7 +60,8 @@ namespace cpsc5031_hw6
             if(path != null)
             {
                 string[] lines;
-                lines = System.IO.File.ReadAllLines(path);
+                lines = File.ReadAllLines(path);
+                File.Exists(path);
                 return lines;
             }
             else
@@ -141,10 +142,14 @@ namespace cpsc5031_hw6
             using(StreamWriter writer = File.CreateText(path))
             {
                 writer.Write(stringbody);
+                writer.Flush();
+                writer.Dispose();
+                writer.Close();
             }
+            File.Exists(path);
             return path;
         }
-
+        
         /// <summary>
         /// Generate Graph based on dot file
         /// </summary>
@@ -175,6 +180,7 @@ namespace cpsc5031_hw6
                 };
                 process.Start();
                 process.StandardInput.WriteLine(command);
+                process.StandardInput.Close();
                 process.WaitForExit();
                 process.CloseMainWindow();
                 process.Close();
