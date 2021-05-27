@@ -16,6 +16,11 @@ namespace cpsc5031_hw6
             GraphVizGenerator("adj2.txt", "adj2.png", "adj2.dot", directory, false);
             GraphVizGenerator("adj3.txt", "adj3.png", "adj3.dot", directory, false);
             GraphVizGenerator("adj4.txt", "adj4.png", "adj4.dot", directory, false);
+
+            GraphVizGenerator("adj1.txt", "adj5.png", "adj5.dot", directory, true);
+            GraphVizGenerator("adj2.txt", "adj6.png", "adj6.dot", directory, true);
+            GraphVizGenerator("adj3.txt", "adj7.png", "adj7.dot", directory, true);
+            GraphVizGenerator("adj4.txt", "adj8.png", "adj8.dot", directory, true);
         }
      
         /// <summary>
@@ -111,15 +116,26 @@ namespace cpsc5031_hw6
         {
             if(lines != null)
             {
-                //string lineOne = "graph matrix {";
-                string lineOne = "digraph matrix {";
+                string graph = "graph matrix {";
+                string dgraph = "digraph matrix {";
                 string lastLine = "}";
-                //string connector = "--";
-                string connector = "->";
+                string gconnector = "--";
+                string dgconnector = "->";
+                string connector = "";
                 //assign name for each node in the graph
                 var nodes = Letters();
                 string dotFileoBody;
-                dotFileoBody = lineOne + "\n";
+                if (digraph)
+                {
+                    dotFileoBody = dgraph + "\n";
+                    connector = dgconnector;
+                }
+                else
+                {
+                    dotFileoBody = graph + "\n";
+                    connector = gconnector;
+                }              
+
                 //to keep track of all the nodes
                 List<string> completedNodes = new List<string>();
                 for (int i = 0; i < lines.Length; i++)
