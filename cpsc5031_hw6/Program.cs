@@ -10,12 +10,12 @@ namespace cpsc5031_hw6
         public static void Main(string[] args)
         {
             Console.WriteLine("Homework 6");
-            //string directory = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\";
-            string directory = @"C:\Users\mr4eyesn\Desktop\CPSC5031_2\week8\homework\code\cpsc5031_hw6\files\";
-            GraphVizGenerator("adj1.txt", "adj1.png", "adj1.dot", directory);
-            GraphVizGenerator("adj2.txt", "adj2.png", "adj2.dot", directory);
-            GraphVizGenerator("adj3.txt", "adj3.png", "adj3.dot", directory);
-            GraphVizGenerator("adj4.txt", "adj4.png", "adj4.dot", directory);
+            string directory = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\";
+            //string directory = @"C:\Users\mr4eyesn\Desktop\CPSC5031_2\week8\homework\code\cpsc5031_hw6\files\";
+            GraphVizGenerator("adj1.txt", "adj1.png", "adj1.dot", directory, false);
+            GraphVizGenerator("adj2.txt", "adj2.png", "adj2.dot", directory, false);
+            GraphVizGenerator("adj3.txt", "adj3.png", "adj3.dot", directory, false);
+            GraphVizGenerator("adj4.txt", "adj4.png", "adj4.dot", directory, false);
         }
      
         /// <summary>
@@ -25,7 +25,7 @@ namespace cpsc5031_hw6
         /// <param name="imageFileName">image file name provide by user</param>
         /// <param name="dotFileName">dot file name provide by user</param>
         /// <param name="directory">location where to get text file, to save dot file and to save image file</param>
-        public static bool GraphVizGenerator(string textFileName, string imageFileName, string dotFileName, string directory)
+        public static bool GraphVizGenerator(string textFileName, string imageFileName, string dotFileName, string directory, bool digraph)
         {
             //null check for all required inputs
             if(textFileName != null || imageFileName != null || dotFileName != null || directory != null)
@@ -34,7 +34,7 @@ namespace cpsc5031_hw6
                 if(!textFileName.Equals(string.Empty) || !imageFileName.Equals(string.Empty) || !dotFileName.Equals(string.Empty) || !directory.Equals(string.Empty))
                 {
                     var lines = readTextFile(directory + textFileName);
-                    var dotFileBody = generateDotFileBody(lines);
+                    var dotFileBody = generateDotFileBody(lines, digraph);
                     var dotFilePath = directory + dotFileName;
                     var dotFile = dotFileCompose(dotFileBody, dotFilePath);
                     generateImage(dotFile, imageFileName, directory);
@@ -66,9 +66,9 @@ namespace cpsc5031_hw6
         /// <param name="dotFileName"></param>
         /// <param name="directory"></param>
         /// <returns></returns>
-        public bool GraphVizGeneratorV2(string textFileName, string imageFileName, string dotFileName, string directory)
+        public bool GraphVizGeneratorV2(string textFileName, string imageFileName, string dotFileName, string directory, bool digraph)
         {
-            return GraphVizGenerator(textFileName, imageFileName, dotFileName, directory);
+            return GraphVizGenerator(textFileName, imageFileName, dotFileName, directory, digraph);
         }
         /// <summary>
         /// read text file
@@ -107,12 +107,15 @@ namespace cpsc5031_hw6
         /// </summary>
         /// <param name="lines">list of lines between two nodes</param>
         /// <returns>string body for a dot file</returns>
-        private static string generateDotFileBody(string[] lines)
+        private static string generateDotFileBody(string[] lines, bool digraph)
         {
             if(lines != null)
             {
-                string lineOne = "graph matrix {";
+                //string lineOne = "graph matrix {";
+                string lineOne = "digraph matrix {";
                 string lastLine = "}";
+                //string connector = "--";
+                string connector = "->";
                 //assign name for each node in the graph
                 var nodes = Letters();
                 string dotFileoBody;
@@ -126,11 +129,11 @@ namespace cpsc5031_hw6
                     {
                         if (list[j].Equals('1'))
                         {
-                            string part1 = nodes[i] + "--" + nodes[j];
-                            string part2 = nodes[j] + "--" + nodes[i];
+                            string part1 = nodes[i] + connector + nodes[j];
+                            string part2 = nodes[j] + connector + nodes[i];
                             if (!completedNodes.Contains(part1) && !completedNodes.Contains(part2))
                             {
-                                dotFileoBody = dotFileoBody + nodes[i] + "--" + nodes[j] + "\n";
+                                dotFileoBody = dotFileoBody + nodes[i] + connector + nodes[j] + "\n";
                                 completedNodes.Add(part1);
                                 completedNodes.Add(part2);
                             }
