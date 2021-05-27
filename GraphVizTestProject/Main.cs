@@ -72,5 +72,53 @@ namespace GraphVizTestProject
             var check = graph.GraphVizGeneratorV2("adj4.txt", "adj8.png", "adj8.dot", directory, true);
             Assert.AreEqual(true, check);
         }
+
+        [TestMethod]
+        public void TestCase_Check_EmptyTextFile_Graph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj5.txt", "adj9.png", "adj9.dot", directory, false);
+            Assert.AreEqual(false, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_EmptyTextFile_digraph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj5.txt", "adj10.png", "adj10.dot", directory, true);
+            Assert.AreEqual(false, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_NoTextFileFoundInTheFolder_Graph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj20.txt", "adj9.png", "adj9.dot", directory, false);
+            Assert.AreEqual(false, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_NoTextFileFoundInTheFolder_dgraph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj20.txt", "adj10.png", "adj10.dot", directory, true);
+            Assert.AreEqual(false, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHasSpecialCharactersMixWith_0_and_1_Graph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj6.txt", "adj11.png", "adj11.dot", directory, false);
+            Assert.AreEqual(true, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHasSpecialCharactersMixWith_0_and_1_dgraph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj6.txt", "adj12.png", "adj12.dot", directory, true);
+            Assert.AreEqual(true, check);
+        }
     }
 }

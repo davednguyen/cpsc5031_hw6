@@ -82,17 +82,33 @@ namespace cpsc5031_hw6
         /// <returns>lines of text files</returns>
         private static string[] readTextFile(string path)
         {
-            if(path != null)
+            //check if the text file provided by user is
+            //existed in the foler
+            if (File.Exists(path))
             {
-                string[] lines;
-                lines = File.ReadAllLines(path);
-                File.Exists(path);
-                return lines;
+                if (path != null)
+                {
+                    string[] lines;
+                    lines = File.ReadAllLines(path);
+                    File.Exists(path);
+                    if (lines.Length > 0)
+                    {
+                        return lines;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {
                 return null;
-            }           
+            }
         }
 
         /// <summary>
@@ -114,7 +130,7 @@ namespace cpsc5031_hw6
         /// <returns>string body for a dot file</returns>
         private static string generateDotFileBody(string[] lines, bool digraph)
         {
-            if(lines != null)
+            if(lines != null && lines.Length > 0)
             {
                 string graph = "graph matrix {";
                 string dgraph = "digraph matrix {";
@@ -178,15 +194,22 @@ namespace cpsc5031_hw6
                 File.Delete(path);
             }
             //write text into dot file
-            using(StreamWriter writer = File.CreateText(path))
+            if(stringbody != null && !stringbody.Equals(string.Empty))
             {
-                writer.Write(stringbody);
-                writer.Flush();
-                writer.Dispose();
-                writer.Close();
+                using (StreamWriter writer = File.CreateText(path))
+                {
+                    writer.Write(stringbody);
+                    writer.Flush();
+                    writer.Dispose();
+                    writer.Close();
+                }
+                File.Exists(path);
+                return path;
             }
-            File.Exists(path);
-            return path;
+            else
+            {
+                return null;
+            }           
         }
         
         /// <summary>
