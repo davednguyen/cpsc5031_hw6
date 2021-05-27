@@ -38,7 +38,14 @@ namespace cpsc5031_hw6
                     var dotFilePath = directory + dotFileName;
                     var dotFile = dotFileCompose(dotFileBody, dotFilePath);
                     generateImage(dotFile, imageFileName, directory);
-                    return true;
+                    if (File.Exists(directory + imageFileName))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
