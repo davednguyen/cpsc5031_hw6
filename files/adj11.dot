@@ -1,0 +1,8 @@
+graph matrix {
+A--C
+A--D
+A
+B--C
+B--D
+D
+}

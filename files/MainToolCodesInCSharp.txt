@@ -16,15 +16,17 @@ namespace cpsc5031_hw6
             Console.WriteLine("Homework 6");
             string directory = @"C:\Users\dzzn\Desktop\CPSC5031_02\week8\homework6\files\";
             //string directory = @"C:\Users\mr4eyesn\Desktop\CPSC5031_2\week8\homework\code\cpsc5031_hw6\files\";
-            GraphVizGenerator("adj1.txt", "adj1.png", "adj1.dot", directory, false);
-            GraphVizGenerator("adj2.txt", "adj2.png", "adj2.dot", directory, false);
-            GraphVizGenerator("adj3.txt", "adj3.png", "adj3.dot", directory, false);
-            GraphVizGenerator("adj4.txt", "adj4.png", "adj4.dot", directory, false);
+            //GraphVizGenerator("adj1.txt", "adj1.png", "adj1.dot", directory, false);
+            //GraphVizGenerator("adj2.txt", "adj2.png", "adj2.dot", directory, false);
+            //GraphVizGenerator("adj3.txt", "adj3.png", "adj3.dot", directory, false);
+            //GraphVizGenerator("adj4.txt", "adj4.png", "adj4.dot", directory, false);
 
-            GraphVizGenerator("adj1.txt", "adj5.png", "adj5.dot", directory, true);
-            GraphVizGenerator("adj2.txt", "adj6.png", "adj6.dot", directory, true);
-            GraphVizGenerator("adj3.txt", "adj7.png", "adj7.dot", directory, true);
-            GraphVizGenerator("adj4.txt", "adj8.png", "adj8.dot", directory, true);
+            //GraphVizGenerator("adj1.txt", "adj5.png", "adj5.dot", directory, true);
+            //GraphVizGenerator("adj2.txt", "adj6.png", "adj6.dot", directory, true);
+            //GraphVizGenerator("adj3.txt", "adj7.png", "adj7.dot", directory, true);
+            //GraphVizGenerator("adj4.txt", "adj8.png", "adj8.dot", directory, true);
+
+            GraphVizGenerator("adj24.txt", "adj17.png", "adj17.dot", directory, false);
         }
      
         /// <summary>
@@ -163,28 +165,31 @@ namespace cpsc5031_hw6
                     var list = lines[i].Trim().Replace(" ", string.Empty);
                     for (int j = 0; j < list.Length; j++)
                     {
-                        if (list[j].Equals('1'))
+                        if(j < list.Length && i < list.Length)
                         {
-                            string part1 = nodes[i] + connector + nodes[j];
-                            string part2 = nodes[j] + connector + nodes[i];
-                            if (!completedNodes.Contains(part1) && !completedNodes.Contains(part2))
+                            if (list[j].Equals('1'))
                             {
-                                dotFileoBody = dotFileoBody + nodes[i] + connector + nodes[j] + "\n";
-                                completedNodes.Add(part1);
-                                completedNodes.Add(part2);
+                                string part1 = nodes[i] + connector + nodes[j];
+                                string part2 = nodes[j] + connector + nodes[i];
+                                if (!completedNodes.Contains(part1) && !completedNodes.Contains(part2))
+                                {
+                                    dotFileoBody = dotFileoBody + nodes[i] + connector + nodes[j] + "\n";
+                                    completedNodes.Add(part1);
+                                    completedNodes.Add(part2);
+                                }
                             }
-                        }
-                        else if (list[j].Equals('0'))
-                        {
-                            string part1 = nodes[i].ToString();
-                            string part2 = nodes[j].ToString();
-                            if (!completedNodes.Contains(part1) && !completedNodes.Contains(part2))
+                            else if (list[j].Equals('0'))
                             {
-                                dotFileoBody = dotFileoBody + nodes[j] + "\n";
-                                completedNodes.Add(part1);
-                                completedNodes.Add(part2);
+                                string part1 = nodes[i].ToString();
+                                string part2 = nodes[j].ToString();
+                                if (!completedNodes.Contains(part1) && !completedNodes.Contains(part2))
+                                {
+                                    dotFileoBody = dotFileoBody + nodes[j] + "\n";
+                                    completedNodes.Add(part1);
+                                    completedNodes.Add(part2);
+                                }
                             }
-                        }
+                        }                        
                     }
                 }
                 dotFileoBody = dotFileoBody + lastLine;

@@ -168,5 +168,37 @@ namespace GraphVizTestProject
             var check = graph.GraphVizGeneratorV2("adj9.txt", "adj15.png", "adj15.dot", directory, true);
             Assert.AreEqual(true, check);
         }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHas_24_nodes_Graph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj24.txt", "adj16.png", "adj16.dot", directory, false);
+            Assert.AreEqual(true, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHas_24_nodes_dgraph()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj24.txt", "adj17.png", "adj17.dot", directory, true);
+            Assert.AreEqual(true, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHas_25_nodes_Graph_EdgeCase()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj25.txt", "adj18.png", "adj18.dot", directory, false);
+            Assert.AreEqual(true, check);
+        }
+
+        [TestMethod]
+        public void TestCase_Check_TextFileHas_25_nodes_dgraph_EdgeCase()
+        {
+            Program graph = new Program();
+            var check = graph.GraphVizGeneratorV2("adj25.txt", "adj19.png", "adj19.dot", directory, true);
+            Assert.AreEqual(true, check);
+        }
     }
 }

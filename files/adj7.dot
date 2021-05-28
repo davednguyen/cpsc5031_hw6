@@ -1,0 +1,13 @@
+digraph matrix {
+A
+A->B
+A->D
+A->E
+B
+B->D
+C
+C->E
+D
+E->B
+E
+}

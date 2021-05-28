@@ -1,0 +1,24 @@
+graph matrix {
+A--A
+A--B
+A--C
+A--D
+E
+A--F
+B--B
+B--C
+B--D
+B--E
+B--F
+C--C
+C--D
+C--E
+C--F
+D--D
+D--F
+E--A
+E--D
+E--E
+E--F
+F--F
+}
